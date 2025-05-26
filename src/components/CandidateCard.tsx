@@ -43,17 +43,17 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate, onClick }) => 
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ 
         y: -8,
-        boxShadow: "0 20px 40px rgba(59, 130, 246, 0.15)",
+        boxShadow: "0 20px 40px rgba(139, 92, 246, 0.15)",
         transition: { duration: 0.3 }
       }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer transition-all duration-300 border border-slate-100 hover:border-blue-200 relative overflow-hidden"
+      className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer transition-all duration-300 border border-slate-100 hover:border-violet-200 relative overflow-hidden"
       onClick={onClick}
     >
       {/* Animated background gradient */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50"
+        className="absolute inset-0 bg-gradient-to-br from-violet-50/50 via-purple-50/50 to-pink-50/50"
         initial={{ opacity: 0 }}
         animate={{ opacity: isHovered ? 1 : 0 }}
         transition={{ duration: 0.3 }}
@@ -73,14 +73,14 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate, onClick }) => 
               className="w-16 h-16 rounded-full object-cover mr-4 border-2 border-white shadow-md"
             />
             <motion.div
-              className="absolute -top-1 -right-1 w-5 h-5 bg-emerald-500 rounded-full border-2 border-white"
+              className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full border-2 border-white"
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
           </motion.div>
           <div className="flex-1">
             <h3 className="text-xl font-semibold text-slate-800 mb-1">{candidate.name}</h3>
-            <p className="text-blue-600 font-medium">{candidate.role}</p>
+            <p className="text-violet-600 font-medium">{candidate.role}</p>
             <div className="flex items-center text-sm text-slate-500 mt-1">
               <Clock className="w-3 h-3 mr-1" />
               <span>{candidate.experience}</span>
@@ -92,7 +92,9 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate, onClick }) => 
               whileTap={{ scale: 0.95 }}
               onClick={handleLike}
               className={`p-2 rounded-full transition-colors ${
-                isLiked ? 'bg-rose-100 text-rose-600' : 'bg-slate-100 text-slate-400 hover:bg-rose-50 hover:text-rose-500'
+                isLiked 
+                  ? 'bg-gradient-to-r from-rose-100 to-pink-100 text-rose-600' 
+                  : 'bg-slate-100 text-slate-400 hover:bg-gradient-to-r hover:from-rose-50 hover:to-pink-50 hover:text-rose-500'
               }`}
             >
               <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
@@ -102,7 +104,9 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate, onClick }) => 
               whileTap={{ scale: 0.95 }}
               onClick={handleBookmark}
               className={`p-2 rounded-full transition-colors ${
-                isBookmarked ? 'bg-amber-100 text-amber-600' : 'bg-slate-100 text-slate-400 hover:bg-amber-50 hover:text-amber-500'
+                isBookmarked 
+                  ? 'bg-gradient-to-r from-amber-100 to-orange-100 text-amber-600' 
+                  : 'bg-slate-100 text-slate-400 hover:bg-gradient-to-r hover:from-amber-50 hover:to-orange-50 hover:text-amber-500'
               }`}
             >
               <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-current' : ''}`} />
@@ -112,12 +116,12 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate, onClick }) => 
 
         {/* Pitch Video Section */}
         <motion.div 
-          className="relative bg-gradient-to-br from-slate-100 to-slate-150 rounded-xl h-32 mb-4 flex items-center justify-center overflow-hidden"
+          className="relative bg-gradient-to-br from-slate-100 via-violet-50 to-purple-100 rounded-xl h-32 mb-4 flex items-center justify-center overflow-hidden"
           whileHover={{ scale: 1.02 }}
           transition={{ duration: 0.2 }}
         >
           <motion.button 
-            className="bg-blue-600 text-white rounded-full p-4 hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-full p-4 hover:from-violet-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={(e) => e.stopPropagation()}
@@ -128,7 +132,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate, onClick }) => 
             1:00
           </span>
           <motion.div
-            className="absolute inset-0 bg-blue-500/20"
+            className="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-purple-500/20"
             initial={{ opacity: 0 }}
             animate={{ opacity: isHovered ? 1 : 0 }}
             transition={{ duration: 0.3 }}
@@ -145,7 +149,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate, onClick }) => 
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
-                className="bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 text-xs px-3 py-1.5 rounded-full border border-blue-200 font-medium"
+                className="bg-gradient-to-r from-violet-50 via-purple-50 to-pink-50 text-violet-700 text-xs px-3 py-1.5 rounded-full border border-violet-200 font-medium"
               >
                 {skill}
               </motion.span>
@@ -164,7 +168,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate, onClick }) => 
         {/* Action Buttons */}
         <div className="flex gap-2 mb-4">
           <motion.button 
-            className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-2.5 px-4 rounded-lg font-medium text-sm shadow-md hover:shadow-lg transition-all duration-300"
+            className="flex-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 text-white py-2.5 px-4 rounded-lg font-medium text-sm shadow-md hover:shadow-lg transition-all duration-300"
             whileHover={{ scale: 1.02, y: -1 }}
             whileTap={{ scale: 0.98 }}
             onClick={(e) => e.stopPropagation()}
@@ -172,7 +176,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate, onClick }) => 
             Shortlist
           </motion.button>
           <motion.button 
-            className="flex-1 bg-gradient-to-r from-slate-500 to-slate-600 text-white py-2.5 px-4 rounded-lg font-medium text-sm shadow-md hover:shadow-lg transition-all duration-300"
+            className="flex-1 bg-gradient-to-r from-slate-400 via-gray-500 to-slate-600 text-white py-2.5 px-4 rounded-lg font-medium text-sm shadow-md hover:shadow-lg transition-all duration-300"
             whileHover={{ scale: 1.02, y: -1 }}
             whileTap={{ scale: 0.98 }}
             onClick={(e) => e.stopPropagation()}
@@ -192,7 +196,7 @@ const CandidateCard: React.FC<CandidateCardProps> = ({ candidate, onClick }) => 
         >
           <textarea
             placeholder="Add notes about this candidate..."
-            className="w-full border border-slate-200 rounded-lg p-3 text-sm resize-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all duration-200"
+            className="w-full border border-violet-200 rounded-lg p-3 text-sm resize-none focus:border-purple-400 focus:ring-2 focus:ring-purple-100 transition-all duration-200"
             rows={isHovered ? 3 : 2}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}

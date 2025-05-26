@@ -47,7 +47,7 @@ const CandidateModal: React.FC<CandidateModalProps> = ({ candidate, isOpen, onCl
             className="relative bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
           >
             {/* Header with gradient background */}
-            <div className="relative bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-8 rounded-t-2xl">
+            <div className="relative bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 text-white p-8 rounded-t-2xl">
               <motion.button
                 onClick={onClose}
                 className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
@@ -74,7 +74,7 @@ const CandidateModal: React.FC<CandidateModalProps> = ({ candidate, isOpen, onCl
                     {candidate.name}
                   </motion.h2>
                   <motion.p 
-                    className="text-blue-100 text-lg font-medium mb-1"
+                    className="text-violet-100 text-lg font-medium mb-1"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3 }}
@@ -82,7 +82,7 @@ const CandidateModal: React.FC<CandidateModalProps> = ({ candidate, isOpen, onCl
                     {candidate.role}
                   </motion.p>
                   <motion.div 
-                    className="flex items-center text-blue-200"
+                    className="flex items-center text-violet-200"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 }}
@@ -104,16 +104,16 @@ const CandidateModal: React.FC<CandidateModalProps> = ({ candidate, isOpen, onCl
                 transition={{ delay: 0.2 }}
               >
                 <h3 className="text-xl font-semibold mb-4 text-slate-800 flex items-center">
-                  <Play className="w-5 h-5 mr-2 text-blue-600" />
+                  <Play className="w-5 h-5 mr-2 text-violet-600" />
                   Pitch Video
                 </h3>
                 <motion.div 
-                  className="relative bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl h-64 flex items-center justify-center overflow-hidden"
+                  className="relative bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50 rounded-xl h-64 flex items-center justify-center overflow-hidden"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
                   <motion.button 
-                    className="bg-blue-600 text-white rounded-full p-6 hover:bg-blue-700 transition-all duration-300 shadow-xl"
+                    className="bg-gradient-to-r from-violet-600 to-purple-600 text-white rounded-full p-6 hover:from-violet-700 hover:to-purple-700 transition-all duration-300 shadow-xl"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -133,7 +133,7 @@ const CandidateModal: React.FC<CandidateModalProps> = ({ candidate, isOpen, onCl
                 transition={{ delay: 0.3 }}
               >
                 <h3 className="text-xl font-semibold mb-4 text-slate-800 flex items-center">
-                  <Award className="w-5 h-5 mr-2 text-blue-600" />
+                  <Award className="w-5 h-5 mr-2 text-violet-600" />
                   About
                 </h3>
                 <p className="text-slate-700 leading-relaxed text-base">{candidate.about}</p>
@@ -147,7 +147,7 @@ const CandidateModal: React.FC<CandidateModalProps> = ({ candidate, isOpen, onCl
                 transition={{ delay: 0.4 }}
               >
                 <h3 className="text-xl font-semibold mb-4 text-slate-800 flex items-center">
-                  <Star className="w-5 h-5 mr-2 text-blue-600" />
+                  <Star className="w-5 h-5 mr-2 text-violet-600" />
                   Skills & Expertise
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -158,7 +158,7 @@ const CandidateModal: React.FC<CandidateModalProps> = ({ candidate, isOpen, onCl
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.1 * index }}
                       whileHover={{ scale: 1.05, y: -2 }}
-                      className="bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium border border-blue-200 text-center hover:shadow-md transition-all duration-200"
+                      className="bg-gradient-to-r from-violet-50 via-purple-50 to-pink-50 text-violet-700 px-4 py-2 rounded-lg text-sm font-medium border border-violet-200 text-center hover:shadow-md transition-all duration-200"
                     >
                       {skill}
                     </motion.span>
@@ -176,17 +176,17 @@ const CandidateModal: React.FC<CandidateModalProps> = ({ candidate, isOpen, onCl
                 <h3 className="text-xl font-semibold mb-4 text-slate-800">Contact Information</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <motion.div 
-                    className="flex items-center p-4 bg-blue-50 rounded-lg border border-blue-100"
+                    className="flex items-center p-4 bg-gradient-to-r from-violet-50 to-purple-50 rounded-lg border border-violet-100"
                     whileHover={{ scale: 1.02, y: -2 }}
                   >
-                    <Mail className="w-5 h-5 mr-3 text-blue-600" />
+                    <Mail className="w-5 h-5 mr-3 text-violet-600" />
                     <div>
                       <p className="text-sm text-slate-600">Email</p>
                       <p className="font-medium text-slate-800">{candidate.email}</p>
                     </div>
                   </motion.div>
                   <motion.div 
-                    className="flex items-center p-4 bg-emerald-50 rounded-lg border border-emerald-100"
+                    className="flex items-center p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-lg border border-emerald-100"
                     whileHover={{ scale: 1.02, y: -2 }}
                   >
                     <Phone className="w-5 h-5 mr-3 text-emerald-600" />
@@ -196,10 +196,10 @@ const CandidateModal: React.FC<CandidateModalProps> = ({ candidate, isOpen, onCl
                     </div>
                   </motion.div>
                   <motion.div 
-                    className="flex items-center p-4 bg-purple-50 rounded-lg border border-purple-100"
+                    className="flex items-center p-4 bg-gradient-to-r from-orange-50 to-pink-50 rounded-lg border border-orange-100"
                     whileHover={{ scale: 1.02, y: -2 }}
                   >
-                    <MapPin className="w-5 h-5 mr-3 text-purple-600" />
+                    <MapPin className="w-5 h-5 mr-3 text-orange-600" />
                     <div>
                       <p className="text-sm text-slate-600">Location</p>
                       <p className="font-medium text-slate-800">{candidate.location}</p>
@@ -216,21 +216,21 @@ const CandidateModal: React.FC<CandidateModalProps> = ({ candidate, isOpen, onCl
                 transition={{ delay: 0.6 }}
               >
                 <motion.button 
-                  className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="flex-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-600 text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   Shortlist Candidate
                 </motion.button>
                 <motion.button 
-                  className="flex-1 bg-gradient-to-r from-slate-500 to-slate-600 text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="flex-1 bg-gradient-to-r from-slate-400 via-gray-500 to-slate-600 text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                   whileHover={{ scale: 1.02, y: -2 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   Reject Candidate
                 </motion.button>
                 <motion.button 
-                  className="px-4 py-4 bg-blue-100 text-blue-600 rounded-xl hover:bg-blue-200 transition-all duration-300"
+                  className="px-4 py-4 bg-gradient-to-r from-violet-100 to-purple-100 text-violet-600 rounded-xl hover:from-violet-200 hover:to-purple-200 transition-all duration-300"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
