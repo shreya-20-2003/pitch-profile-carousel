@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
 import { motion } from 'framer-motion';
+import { ChevronLeft, ChevronRight, Users, Target, Zap } from 'lucide-react';
 import CandidateCard from './CandidateCard';
 import CandidateModal from './CandidateModal';
 import { candidatesData } from '../data/candidatesData';
@@ -27,24 +28,70 @@ const RecruiterPitchCarousel = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 py-8">
+      {/* Header Section */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-8"
+        transition={{ duration: 0.8 }}
+        className="text-center mb-12"
       >
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="inline-flex items-center bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 px-6 py-3 rounded-full text-sm font-medium mb-6 border border-blue-200"
+        >
+          <Target className="w-4 h-4 mr-2" />
+          AI-Powered Talent Discovery
+        </motion.div>
+        
+        <motion.h1 
+          className="text-5xl font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           Discover Top Talent
-        </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Swipe through our curated selection of candidates and find your next great hire
-        </p>
+        </motion.h1>
+        
+        <motion.p 
+          className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          Swipe through our curated selection of candidates and find your next great hire with interactive pitch videos
+        </motion.p>
+
+        {/* Stats */}
+        <motion.div 
+          className="flex justify-center items-center gap-8 mt-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          <div className="text-center">
+            <div className="text-2xl font-bold text-blue-600">500+</div>
+            <div className="text-sm text-slate-500">Active Candidates</div>
+          </div>
+          <div className="w-px h-8 bg-slate-200"></div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-emerald-600">95%</div>
+            <div className="text-sm text-slate-500">Match Success</div>
+          </div>
+          <div className="w-px h-8 bg-slate-200"></div>
+          <div className="text-center">
+            <div className="text-2xl font-bold text-purple-600">24h</div>
+            <div className="text-sm text-slate-500">Response Time</div>
+          </div>
+        </motion.div>
       </motion.div>
 
+      {/* Carousel Section */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+        transition={{ duration: 0.8, delay: 0.3 }}
         className="relative"
       >
         <Swiper
@@ -52,8 +99,8 @@ const RecruiterPitchCarousel = () => {
           spaceBetween={30}
           slidesPerView={1}
           navigation={{
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+            nextEl: '.custom-swiper-button-next',
+            prevEl: '.custom-swiper-button-prev',
           }}
           pagination={{
             clickable: true,
@@ -81,14 +128,14 @@ const RecruiterPitchCarousel = () => {
               spaceBetween: 40,
             },
           }}
-          className="pb-12"
+          className="pb-16"
         >
           {candidatesData.map((candidate, index) => (
             <SwiperSlide key={candidate.id}>
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
               >
                 <CandidateCard
                   candidate={candidate}
@@ -99,9 +146,39 @@ const RecruiterPitchCarousel = () => {
           ))}
         </Swiper>
 
-        {/* Custom navigation buttons */}
-        <div className="swiper-button-prev !text-blue-600 !bg-white !shadow-lg !rounded-full !w-12 !h-12 after:!text-lg"></div>
-        <div className="swiper-button-next !text-blue-600 !bg-white !shadow-lg !rounded-full !w-12 !h-12 after:!text-lg"></div>
+        {/* Custom Navigation Buttons */}
+        <motion.button 
+          className="custom-swiper-button-prev absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white shadow-xl rounded-full p-4 text-blue-600 hover:bg-blue-50 transition-all duration-300 border border-blue-100"
+          whileHover={{ scale: 1.1, x: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </motion.button>
+        
+        <motion.button 
+          className="custom-swiper-button-next absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white shadow-xl rounded-full p-4 text-blue-600 hover:bg-blue-50 transition-all duration-300 border border-blue-100"
+          whileHover={{ scale: 1.1, x: 2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ChevronRight className="w-6 h-6" />
+        </motion.button>
+      </motion.div>
+
+      {/* CTA Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        className="text-center mt-16"
+      >
+        <motion.button
+          className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+          whileHover={{ scale: 1.05, y: -2 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Users className="w-5 h-5 mr-2 inline" />
+          View All Candidates
+        </motion.button>
       </motion.div>
 
       {/* Modal */}

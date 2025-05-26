@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Mail, Phone, MapPin, Play } from 'lucide-react';
+import { X, Mail, Phone, MapPin, Play, Star, Calendar, Award, ExternalLink } from 'lucide-react';
 
 interface Candidate {
   id: number;
@@ -34,100 +34,209 @@ const CandidateModal: React.FC<CandidateModalProps> = ({ candidate, isOpen, onCl
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black bg-opacity-50"
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
             onClick={onClose}
           />
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className="relative bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            transition={{ type: "spring", duration: 0.5 }}
+            className="relative bg-white rounded-2xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
           >
-            {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b">
-              <div className="flex items-center">
-                <img
-                  src={candidate.avatar}
-                  alt={candidate.name}
-                  className="w-16 h-16 rounded-full object-cover mr-4"
-                />
-                <div>
-                  <h2 className="text-2xl font-bold text-gray-900">{candidate.name}</h2>
-                  <p className="text-gray-600">{candidate.role}</p>
-                  <p className="text-sm text-gray-500">{candidate.experience}</p>
-                </div>
-              </div>
-              <button
+            {/* Header with gradient background */}
+            <div className="relative bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-8 rounded-t-2xl">
+              <motion.button
                 onClick={onClose}
-                className="text-gray-400 hover:text-gray-600 transition-colors"
+                className="absolute top-4 right-4 text-white/80 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-full"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <X className="w-6 h-6" />
-              </button>
+              </motion.button>
+
+              <div className="flex items-center">
+                <motion.img
+                  src={candidate.avatar}
+                  alt={candidate.name}
+                  className="w-20 h-20 rounded-full object-cover mr-6 border-4 border-white/20 shadow-lg"
+                  whileHover={{ scale: 1.05 }}
+                />
+                <div>
+                  <motion.h2 
+                    className="text-3xl font-bold mb-2"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    {candidate.name}
+                  </motion.h2>
+                  <motion.p 
+                    className="text-blue-100 text-lg font-medium mb-1"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    {candidate.role}
+                  </motion.p>
+                  <motion.div 
+                    className="flex items-center text-blue-200"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <Calendar className="w-4 h-4 mr-1" />
+                    <span className="text-sm">{candidate.experience}</span>
+                  </motion.div>
+                </div>
+              </div>
             </div>
 
             {/* Content */}
-            <div className="p-6">
+            <div className="p-8">
               {/* Pitch Video */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-3">Pitch Video</h3>
-                <div className="relative bg-gray-100 rounded-lg h-48 flex items-center justify-center">
-                  <button className="bg-blue-600 text-white rounded-full p-4 hover:bg-blue-700 transition-colors">
-                    <Play className="w-8 h-8" />
-                  </button>
-                </div>
-              </div>
+              <motion.div 
+                className="mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <h3 className="text-xl font-semibold mb-4 text-slate-800 flex items-center">
+                  <Play className="w-5 h-5 mr-2 text-blue-600" />
+                  Pitch Video
+                </h3>
+                <motion.div 
+                  className="relative bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl h-64 flex items-center justify-center overflow-hidden"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.button 
+                    className="bg-blue-600 text-white rounded-full p-6 hover:bg-blue-700 transition-all duration-300 shadow-xl"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Play className="w-10 h-10" />
+                  </motion.button>
+                  <span className="absolute top-4 right-4 bg-black/70 text-white text-sm px-3 py-1 rounded-full backdrop-blur-sm">
+                    1:00
+                  </span>
+                </motion.div>
+              </motion.div>
 
               {/* About */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-3">About</h3>
-                <p className="text-gray-700 leading-relaxed">{candidate.about}</p>
-              </div>
+              <motion.div 
+                className="mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <h3 className="text-xl font-semibold mb-4 text-slate-800 flex items-center">
+                  <Award className="w-5 h-5 mr-2 text-blue-600" />
+                  About
+                </h3>
+                <p className="text-slate-700 leading-relaxed text-base">{candidate.about}</p>
+              </motion.div>
 
               {/* Skills */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-3">Skills</h3>
-                <div className="flex flex-wrap gap-2">
+              <motion.div 
+                className="mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                <h3 className="text-xl font-semibold mb-4 text-slate-800 flex items-center">
+                  <Star className="w-5 h-5 mr-2 text-blue-600" />
+                  Skills & Expertise
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {candidate.skills.map((skill, index) => (
-                    <span
+                    <motion.span
                       key={index}
-                      className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.1 * index }}
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      className="bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium border border-blue-200 text-center hover:shadow-md transition-all duration-200"
                     >
                       {skill}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
 
               {/* Contact Info */}
-              <div className="mb-6">
-                <h3 className="text-lg font-semibold mb-3">Contact Information</h3>
-                <div className="space-y-2">
-                  <div className="flex items-center text-gray-600">
-                    <Mail className="w-4 h-4 mr-2" />
-                    <span>{candidate.email}</span>
-                  </div>
-                  <div className="flex items-center text-gray-600">
-                    <Phone className="w-4 h-4 mr-2" />
-                    <span>{candidate.phone}</span>
-                  </div>
-                  <div className="flex items-center text-gray-600">
-                    <MapPin className="w-4 h-4 mr-2" />
-                    <span>{candidate.location}</span>
-                  </div>
+              <motion.div 
+                className="mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+              >
+                <h3 className="text-xl font-semibold mb-4 text-slate-800">Contact Information</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <motion.div 
+                    className="flex items-center p-4 bg-blue-50 rounded-lg border border-blue-100"
+                    whileHover={{ scale: 1.02, y: -2 }}
+                  >
+                    <Mail className="w-5 h-5 mr-3 text-blue-600" />
+                    <div>
+                      <p className="text-sm text-slate-600">Email</p>
+                      <p className="font-medium text-slate-800">{candidate.email}</p>
+                    </div>
+                  </motion.div>
+                  <motion.div 
+                    className="flex items-center p-4 bg-emerald-50 rounded-lg border border-emerald-100"
+                    whileHover={{ scale: 1.02, y: -2 }}
+                  >
+                    <Phone className="w-5 h-5 mr-3 text-emerald-600" />
+                    <div>
+                      <p className="text-sm text-slate-600">Phone</p>
+                      <p className="font-medium text-slate-800">{candidate.phone}</p>
+                    </div>
+                  </motion.div>
+                  <motion.div 
+                    className="flex items-center p-4 bg-purple-50 rounded-lg border border-purple-100"
+                    whileHover={{ scale: 1.02, y: -2 }}
+                  >
+                    <MapPin className="w-5 h-5 mr-3 text-purple-600" />
+                    <div>
+                      <p className="text-sm text-slate-600">Location</p>
+                      <p className="font-medium text-slate-800">{candidate.location}</p>
+                    </div>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Action Buttons */}
-              <div className="flex gap-3">
-                <button className="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition-colors font-medium">
+              <motion.div 
+                className="flex gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+              >
+                <motion.button 
+                  className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
                   Shortlist Candidate
-                </button>
-                <button className="flex-1 bg-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors font-medium">
+                </motion.button>
+                <motion.button 
+                  className="flex-1 bg-gradient-to-r from-slate-500 to-slate-600 text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                >
                   Reject Candidate
-                </button>
-              </div>
+                </motion.button>
+                <motion.button 
+                  className="px-4 py-4 bg-blue-100 text-blue-600 rounded-xl hover:bg-blue-200 transition-all duration-300"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <ExternalLink className="w-6 h-6" />
+                </motion.button>
+              </motion.div>
             </div>
           </motion.div>
         </div>
