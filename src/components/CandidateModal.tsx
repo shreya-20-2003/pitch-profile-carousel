@@ -1,190 +1,136 @@
 
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Play, Mail, Phone, MapPin, Calendar, Award } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
+import { X, Mail, Phone, MapPin, Play } from 'lucide-react';
 
-const CandidateModal = ({ candidate, isOpen, onClose }) => {
+interface Candidate {
+  id: number;
+  name: string;
+  role: string;
+  experience: string;
+  avatar: string;
+  skills: string[];
+  about: string;
+  email: string;
+  phone: string;
+  location: string;
+}
+
+interface CandidateModalProps {
+  candidate: Candidate | null;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const CandidateModal: React.FC<CandidateModalProps> = ({ candidate, isOpen, onClose }) => {
   if (!candidate) return null;
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
-          onClick={onClose}
-        >
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop */}
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.9, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-black bg-opacity-50"
+            onClick={onClose}
+          />
+
+          {/* Modal */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            className="relative bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto"
           >
             {/* Header */}
-            <div className="relative h-64 bg-gradient-to-br from-blue-100 to-purple-100">
-              <img
-                src={candidate.avatar}
-                alt={candidate.name}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-20" />
-              
-              <Button
-                onClick={onClose}
-                variant="outline"
-                size="icon"
-                className="absolute top-4 right-4 bg-white bg-opacity-90 hover:bg-white"
-              >
-                <X className="w-4 h-4" />
-              </Button>
-
-              <div className="absolute bottom-4 left-4 text-white">
-                <h2 className="text-3xl font-bold">{candidate.name}</h2>
-                <p className="text-xl opacity-90">{candidate.role}</p>
+            <div className="flex items-center justify-between p-6 border-b">
+              <div className="flex items-center">
+                <img
+                  src={candidate.avatar}
+                  alt={candidate.name}
+                  className="w-16 h-16 rounded-full object-cover mr-4"
+                />
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">{candidate.name}</h2>
+                  <p className="text-gray-600">{candidate.role}</p>
+                  <p className="text-sm text-gray-500">{candidate.experience}</p>
+                </div>
               </div>
-
-              <Button
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white bg-opacity-90 hover:bg-white text-blue-600"
-                size="lg"
+              <button
+                onClick={onClose}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
               >
-                <Play className="w-6 h-6 mr-2" fill="currentColor" />
-                Play Full Pitch
-              </Button>
+                <X className="w-6 h-6" />
+              </button>
             </div>
 
-            <div className="p-8">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Main Content */}
-                <div className="lg:col-span-2 space-y-6">
-                  {/* About */}
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>About</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-gray-700 leading-relaxed">
-                        {candidate.about || `${candidate.name} is a ${candidate.role.toLowerCase()} with ${candidate.experience}. Passionate about technology and innovation, they bring a unique perspective to every project they work on.`}
-                      </p>
-                    </CardContent>
-                  </Card>
-
-                  {/* Skills */}
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Skills & Technologies</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-wrap gap-2">
-                        {candidate.skills.map((skill, index) => (
-                          <Badge 
-                            key={index} 
-                            variant="secondary" 
-                            className="bg-blue-50 text-blue-700 px-3 py-1"
-                          >
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  {/* Experience */}
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Experience</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div className="flex items-start space-x-3">
-                          <Award className="w-5 h-5 text-blue-600 mt-1" />
-                          <div>
-                            <h4 className="font-medium">{candidate.role}</h4>
-                            <p className="text-sm text-gray-600">{candidate.experience}</p>
-                            <p className="text-sm text-gray-500 mt-1">
-                              Led multiple high-impact projects and mentored junior team members
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+            {/* Content */}
+            <div className="p-6">
+              {/* Pitch Video */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-3">Pitch Video</h3>
+                <div className="relative bg-gray-100 rounded-lg h-48 flex items-center justify-center">
+                  <button className="bg-blue-600 text-white rounded-full p-4 hover:bg-blue-700 transition-colors">
+                    <Play className="w-8 h-8" />
+                  </button>
                 </div>
+              </div>
 
-                {/* Sidebar */}
-                <div className="space-y-6">
-                  {/* Contact Info */}
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Contact Information</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      <div className="flex items-center space-x-3">
-                        <Mail className="w-4 h-4 text-gray-500" />
-                        <span className="text-sm">{candidate.email || 'Available upon request'}</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <Phone className="w-4 h-4 text-gray-500" />
-                        <span className="text-sm">{candidate.phone || 'Available upon request'}</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <MapPin className="w-4 h-4 text-gray-500" />
-                        <span className="text-sm">{candidate.location || 'Remote / Flexible'}</span>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <Calendar className="w-4 h-4 text-gray-500" />
-                        <span className="text-sm">Available immediately</span>
-                      </div>
-                    </CardContent>
-                  </Card>
+              {/* About */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-3">About</h3>
+                <p className="text-gray-700 leading-relaxed">{candidate.about}</p>
+              </div>
 
-                  {/* Quick Stats */}
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Quick Stats</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-600">Experience:</span>
-                        <span className="text-sm font-medium">{candidate.experience}</span>
-                      </div>
-                      <Separator />
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-600">Skills:</span>
-                        <span className="text-sm font-medium">{candidate.skills.length} core skills</span>
-                      </div>
-                      <Separator />
-                      <div className="flex justify-between">
-                        <span className="text-sm text-gray-600">Availability:</span>
-                        <span className="text-sm font-medium text-green-600">Available</span>
-                      </div>
-                    </CardContent>
-                  </Card>
+              {/* Skills */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-3">Skills</h3>
+                <div className="flex flex-wrap gap-2">
+                  {candidate.skills.map((skill, index) => (
+                    <span
+                      key={index}
+                      className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
 
-                  {/* Action Buttons */}
-                  <div className="space-y-3">
-                    <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                      Schedule Interview
-                    </Button>
-                    <Button variant="outline" className="w-full">
-                      Send Message
-                    </Button>
-                    <Button variant="outline" className="w-full">
-                      Download Resume
-                    </Button>
+              {/* Contact Info */}
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold mb-3">Contact Information</h3>
+                <div className="space-y-2">
+                  <div className="flex items-center text-gray-600">
+                    <Mail className="w-4 h-4 mr-2" />
+                    <span>{candidate.email}</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <Phone className="w-4 h-4 mr-2" />
+                    <span>{candidate.phone}</span>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <MapPin className="w-4 h-4 mr-2" />
+                    <span>{candidate.location}</span>
                   </div>
                 </div>
               </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-3">
+                <button className="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition-colors font-medium">
+                  Shortlist Candidate
+                </button>
+                <button className="flex-1 bg-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition-colors font-medium">
+                  Reject Candidate
+                </button>
+              </div>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       )}
     </AnimatePresence>
   );
