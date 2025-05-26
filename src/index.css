@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -98,4 +99,23 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Custom Swiper styles */
+.swiper-pagination-bullet {
+  @apply bg-blue-600 opacity-50;
+}
+
+.swiper-pagination-bullet-active {
+  @apply opacity-100;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  @apply transition-all duration-200;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  @apply scale-110;
 }
