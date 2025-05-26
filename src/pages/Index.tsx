@@ -1,11 +1,29 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { LogIn } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import RecruiterPitchCarousel from '../components/RecruiterPitchCarousel';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50">
+      {/* Header with Login Button */}
+      <header className="container mx-auto px-4 py-6">
+        <div className="flex justify-between items-center">
+          <div className="text-2xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            TalentFlow
+          </div>
+          <Link to="/login">
+            <Button className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white">
+              <LogIn className="w-4 h-4 mr-2" />
+              Sign In
+            </Button>
+          </Link>
+        </div>
+      </header>
+
       <div className="container mx-auto px-4 py-8">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
