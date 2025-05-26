@@ -2,13 +2,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Lock, Phone, ArrowLeft } from 'lucide-react';
+import { Mail, Lock, Phone, ArrowLeft, User, Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 const Login = () => {
+  const [userType, setUserType] = useState<'user' | 'recruiter'>('user');
   const [loginType, setLoginType] = useState<'email' | 'otp'>('email');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,7 +17,7 @@ const Login = () => {
 
   const handleLogin = () => {
     // TODO: Integrate with Firebase Auth
-    console.log('Login attempt:', { loginType, email, password, phone });
+    console.log('Login attempt:', { userType, loginType, email, password, phone });
     // Redirect to dashboard after successful login
     window.location.href = '/dashboard';
   };
@@ -45,10 +46,39 @@ const Login = () => {
               Welcome Back
             </CardTitle>
             <CardDescription>
-              Sign in to access your TalentFlow dashboard
+              Sign in to access your TalentFlow account
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
+            {/* User Type Selection */}
+            <div className="space-y-3">
+              <Label className="text-sm font-medium text-gray-700">I am a:</Label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  onClick={() => setUserType('user')}
+                  className={`flex flex-col items-center p-4 rounded-lg border-2 transition-all ${
+                    userType === 'user'
+                      ? 'border-violet-500 bg-violet-50 text-violet-700'
+                      : 'border-gray-200 hover:border-violet-300 hover:bg-violet-25'
+                  }`}
+                >
+                  <User className="w-6 h-6 mb-2" />
+                  <span className="text-sm font-medium">Job Seeker</span>
+                </button>
+                <button
+                  onClick={() => setUserType('recruiter')}
+                  className={`flex flex-col items-center p-4 rounded-lg border-2 transition-all ${
+                    userType === 'recruiter'
+                      ? 'border-violet-500 bg-violet-50 text-violet-700'
+                      : 'border-gray-200 hover:border-violet-300 hover:bg-violet-25'
+                  }`}
+                >
+                  <Briefcase className="w-6 h-6 mb-2" />
+                  <span className="text-sm font-medium">Recruiter</span>
+                </button>
+              </div>
+            </div>
+
             {/* Login Type Toggle */}
             <div className="flex bg-violet-50 rounded-lg p-1">
               <button
@@ -133,7 +163,7 @@ const Login = () => {
               onClick={handleLogin}
               className="w-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white"
             >
-              {loginType === 'email' ? 'Sign In' : 'Send OTP'}
+              {loginType === 'email' ? 'Sign In' : 'Send OTP'} as {userType === 'user' ? 'Job Seeker' : 'Recruiter'}
             </Button>
 
             {/* Divider */}
@@ -151,7 +181,7 @@ const Login = () => {
               <Button
                 variant="outline"
                 className="w-full border-violet-200 hover:bg-violet-50"
-                onClick={() => console.log('Google login')}
+                onClick={() => console.log('Google login as', userType)}
               >
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -165,7 +195,7 @@ const Login = () => {
               <Button
                 variant="outline"
                 className="w-full border-violet-200 hover:bg-violet-50"
-                onClick={() => console.log('LinkedIn login')}
+                onClick={() => console.log('LinkedIn login as', userType)}
               >
                 <svg className="w-5 h-5 mr-2" fill="#0077B5" viewBox="0 0 24 24">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
