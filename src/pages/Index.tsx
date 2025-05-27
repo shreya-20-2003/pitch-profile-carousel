@@ -1,7 +1,8 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { LogIn } from 'lucide-react';
+import { LogIn, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import RecruiterPitchCarousel from '../components/RecruiterPitchCarousel';
 
