@@ -16,6 +16,7 @@ import Leaderboard from "./pages/Leaderboard";
 import Carousel from "./pages/Carousel";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import RecruiterDashboard from "./pages/RecruiterDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => (
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/recruiter-dashboard" element={<RecruiterDashboard />} />
               <Route path="/candidates" element={<ViewCandidates />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
               <Route path="/carousel" element={<Carousel />} />
