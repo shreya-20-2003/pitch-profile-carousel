@@ -30,15 +30,15 @@ const EngagementTools = () => {
   const messageTemplates = [
     {
       name: 'Initial Interest',
-      content: 'Hi {{name}}, I came across your profile and was impressed by your experience in {{role}}. Would you be interested in discussing a new opportunity?'
+      content: 'Hi [name], I came across your profile and was impressed by your experience in [role]. Would you be interested in discussing a new opportunity?'
     },
     {
       name: 'Interview Invitation',
-      content: 'Hi {{name}}, Thank you for your interest! We would like to schedule an interview to discuss the {{role}} position. When would be a good time for you?'
+      content: 'Hi [name], Thank you for your interest! We would like to schedule an interview to discuss the [role] position. When would be a good time for you?'
     },
     {
       name: 'Follow Up',
-      content: 'Hi {{name}}, I wanted to follow up on our previous conversation about the {{role}} position. Do you have any questions or would you like to proceed to the next step?'
+      content: 'Hi [name], I wanted to follow up on our previous conversation about the [role] position. Do you have any questions or would you like to proceed to the next step?'
     }
   ];
 
@@ -225,7 +225,7 @@ const EngagementTools = () => {
                     />
                     <div className="flex justify-between items-center">
                       <p className="text-sm text-gray-600">
-                        Use {{name}} and {{role}} for personalization
+                        Use [name] and [role] for personalization
                       </p>
                       <div className="flex gap-2">
                         <Button variant="outline" className="border-violet-200 text-violet-600">
