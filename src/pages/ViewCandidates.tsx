@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Eye, Heart, MessageSquare, BookmarkPlus, MapPin, Briefcase } from 'lucide-react';
+import { Eye, Heart, MessageSquare, BookmarkPlus, MapPin, Briefcase, Save } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -9,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 
 const ViewCandidates = () => {
   const [savedNotes, setSavedNotes] = useState<{[key: string]: string}>({});
+  const [tempNotes, setTempNotes] = useState<{[key: string]: string}>({});
 
   // Mock data - this would come from your database
   const candidates = [
@@ -92,8 +92,14 @@ const ViewCandidates = () => {
     }
   ];
 
-  const handleSaveNote = (candidateId: string, note: string) => {
+  const handleSaveNote = (candidateId: string) => {
+    const note = tempNotes[candidateId] || '';
     setSavedNotes(prev => ({ ...prev, [candidateId]: note }));
+    console.log(`Note saved for candidate ${candidateId}:`, note);
+  };
+
+  const handleNoteChange = (candidateId: string, note: string) => {
+    setTempNotes(prev => ({ ...prev, [candidateId]: note }));
   };
 
   const handleViewPitch = (candidateId: string) => {
@@ -196,11 +202,21 @@ const ViewCandidates = () => {
                   <div className="mb-4">
                     <textarea
                       placeholder="Add a note about this candidate..."
-                      value={savedNotes[candidate.id] || ''}
-                      onChange={(e) => handleSaveNote(candidate.id, e.target.value)}
+                      value={tempNotes[candidate.id] || savedNotes[candidate.id] || ''}
+                      onChange={(e) => handleNoteChange(candidate.id, e.target.value)}
                       className="w-full p-2 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-violet-500 resize-none"
                       rows={2}
                     />
+                    {tempNotes[candidate.id] && tempNotes[candidate.id] !== savedNotes[candidate.id] && (
+                      <Button
+                        onClick={() => handleSaveNote(candidate.id)}
+                        size="sm"
+                        className="mt-2 bg-emerald-600 hover:bg-emerald-700"
+                      >
+                        <Save className="w-4 h-4 mr-1" />
+                        Save Note
+                      </Button>
+                    )}
                   </div>
 
                   {/* Action Buttons */}
