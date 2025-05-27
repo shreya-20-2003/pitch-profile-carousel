@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -78,6 +77,36 @@ const Index = () => {
             </div>
           </div>
         </motion.div>
+
+        {/* CTA Section */}
+        <motion.section
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+          className="py-16 bg-gradient-to-r from-violet-600 to-purple-600"
+        >
+          <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-white mb-4">
+              Ready to Get Started?
+            </h2>
+            <p className="text-xl text-violet-100 mb-8 max-w-2xl mx-auto">
+              Join thousands of professionals who have transformed their careers with TalentFlow
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/home">
+                <Button size="lg" className="bg-white text-violet-600 hover:bg-violet-50 text-lg px-8 py-3">
+                  Explore Platform
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+              <Link to="/login">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-violet-600 text-lg px-8 py-3">
+                  Sign In
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </motion.section>
       </div>
     </div>
   );
