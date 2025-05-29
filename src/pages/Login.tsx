@@ -18,8 +18,13 @@ const Login = () => {
   const handleLogin = () => {
     // TODO: Integrate with Firebase Auth
     console.log('Login attempt:', { userType, loginType, email, password, phone });
-    // Redirect to dashboard after successful login
-    window.location.href = '/dashboard';
+    
+    // Redirect to appropriate dashboard based on user type
+    if (userType === 'user') {
+      window.location.href = '/user-dashboard';
+    } else {
+      window.location.href = '/recruiter-dashboard';
+    }
   };
 
   return (
