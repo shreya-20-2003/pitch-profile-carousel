@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,7 +16,6 @@ import ViewCandidates from "./pages/ViewCandidates";
 import Leaderboard from "./pages/Leaderboard";
 import Carousel from "./pages/Carousel";
 import About from "./pages/About";
-import Contact from "./pages/Contact";
 import RecruiterDashboard from "./pages/RecruiterDashboard";
 import BookmarkedCandidates from "./pages/BookmarkedCandidates";
 import JobManagement from "./pages/JobManagement";
